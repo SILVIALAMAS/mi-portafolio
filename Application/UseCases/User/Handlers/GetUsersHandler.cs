@@ -6,11 +6,11 @@
     using TicketingAPI.Application.DTOs.User;
     public class GetUsersHandler
     {
-        private readonly IUserRepository _repo;
+        private readonly IUserRepository _userRepository;
 
-        public GetUsersHandler(IUserRepository repo)
+        public GetUsersHandler(IUserRepository userRepository)
         {
-            _repo = repo;
+            _userRepository = userRepository;
         }
 
         public async Task<List<UserResponseDto>> Execute()

@@ -19,7 +19,7 @@ namespace TicketingAPI.Application.UseCases.Seats.Handlers
         }
         public async Task<(bool Success, ReserveSeatResponseDto? Result, string? Error)> HandleAsync(ReserveSeatCommand command)
         {
-            await _auditLogRepository.CreateAsync(new AuditLog
+            await _auditLogRepository.CreateAsync(new TicketingAPI.Domain.Entities.AuditLog
             //Log del intento siempre
 
             {
@@ -27,20 +27,20 @@ namespace TicketingAPI.Application.UseCases.Seats.Handlers
                 Action = "RESERVE_ATTEMPT",
                 EntityType = "Seat",
                 EntityId = command.SeatId.ToString(),
-                Details = $"{{\"userId\": {command.UserId}, \"seatId\":\"{command.SeatId}\"}}"
+                Details = "{\"userId\":\""+command.UserId+"\", \"seatId\":\""+command.SeatId+"\"}"
             });
             var seat = await _seatRepository.GetByIdAsync(command.SeatId);
             if (seat == null)
                 return (false, null, "Butaca no encontrada");
             if (seat.Status != "Available")
             {
-                await _auditLogRepository.CreateAsync(new AuditLog
+                await _auditLogRepository.CreateAsync(new TicketingAPI.Domain.Entities.AuditLog
                 {
                     UserId = command.UserId,
                     Action = "RESERVE_FAILED",
                     EntityType = "Seat",
                     EntityId = command.SeatId.ToString(),
-                    Details = $"{{\"reason\": \"not_available\", \"status\":\"{seat.Status}\"}}"
+                    Details = "{\"reason\": \"not_available\", \"status\":\""+seat.Status+"\"}"
                 });
                 return (false, null, "Butaca no disponible");
             }
@@ -59,13 +59,13 @@ namespace TicketingAPI.Application.UseCases.Seats.Handlers
             };
             var created = await _reservationRepository.CreateAsync(reservation);
             //Log de reserva exitosa
-            await _auditLogRepository.CreateAsync(new AuditLog
+            await _auditLogRepository.CreateAsync(new TicketingAPI.Domain.Entities.AuditLog
             {
                 UserId = command.UserId,
                 Action = "RESERVE_SUCCESS",
                 EntityType = "Seat",
                 EntityId = command.SeatId.ToString(),
-                Details = $"{{\"reservationId\": {created.Id}, \"expiresAt\":\"{created.ExpiresAt:0}\"}}"
+                Details = "{\"reservationId\":\""+ created.Id+"\", \"expiresAt\":\""+created.ExpiresAt+"\"}"
             });
                 return (true,new ReserveSeatResponseDto
                 {

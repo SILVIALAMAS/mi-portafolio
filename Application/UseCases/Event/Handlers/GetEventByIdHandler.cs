@@ -15,7 +15,7 @@ namespace TicketingAPI.Application.UseCases.Event.Handlers
         }
         public async Task<EventResponseDto?> HandleAsync(GetEventByIdQuery query)
         {
-            var existingEvent = await _eventRepository.GetByIdWithSectorAsync(query.Id);
+            var existingEvent = await _eventRepository.GetByIdWithSectorsAsync(query.Id);
             if (existingEvent == null)
             {
                 throw new Exception("Evento no encontrado");

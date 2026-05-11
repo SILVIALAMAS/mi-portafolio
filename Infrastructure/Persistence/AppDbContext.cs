@@ -102,22 +102,20 @@
             //----------50 BUTACAS POR SECTOR-------------------
             var seats = new List<Seat>();
             string[] rows = { "A", "B", "C", "D", "E" };
-            int seatCounter = 1;
+            
             for (int sectorId = 1; sectorId <= 9; sectorId++)
             {
-                for (int i = 0; i < 10; i++)
+
+                foreach (var row in rows)
                 {
-                    foreach (var row in rows)
+                    for (int num = 1; num <= 10; num++)//NUEVO CORREGIDO CON COPILOT
                     {
-                        for (int num = 1; num <= 10; num++)
-                        {
-                            seats.Add(new Seat { Id = Guid.Parse($"00000000-0000-0000-{sectorId:D4}-{seatCounter:D12}"), SectorId = sectorId, RowIdentifier = row, SeatNumber = num, Status = "Available", Version = 0 });
-                            seatCounter++;
-                        }
+                        seats.Add(new Seat { Id = Guid.NewGuid(), SectorId = sectorId, RowIdentifier = row, SeatNumber = num, Status = "Available", Version = 0 });
+
                     }
                 }
-                modelBuilder.Entity<Seat>().HasData(seats);
+
+            } modelBuilder.Entity<Seat>().HasData(seats);
             }
         }
     }
-}

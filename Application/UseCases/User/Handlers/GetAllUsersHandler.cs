@@ -1,6 +1,5 @@
 ﻿using TicketingAPI.Application.Interfaces;
-using TicketingAPI.Domain.Entities;
-using TicketingAPI.Application.UseCases.User.Commands;
+
 using TicketingAPI.Application.DTOs.User;
 using TicketingAPI.Application.UseCases.User.Queries;
 namespace TicketingAPI.Application.UseCases.User.Handlers

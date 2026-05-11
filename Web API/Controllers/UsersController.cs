@@ -1,45 +1,51 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Reflection.Metadata;
-using TicketingAPI.Application.DTOs.User;
-using TicketingAPI.Application.Services;
-using TicketingAPI.Application.UseCases.User.Commands;using TicketingAPI.Application.UseCases.User.Queries;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Tracing;
+using TicketingAPI.Application.Interfaces;
+using TicketingAPI.Application.UseCases.User.Commands;
 using TicketingAPI.Domain.Entities;
-using TicketingAPI.Infrastructure;
-using TicketingAPI.Application.UseCases.User.Handlers;
-namespace TicketingAPI.Controllers
+
+namespace TicketingAPI.WebAPI.Controllers
 {
     [ApiController]
-    [Route("api/users")]
+    [Route("api/v1/users")]
     public class UsersController : ControllerBase
     {
-       // private readonly UserService _service;//AppDbContext _context;
-        private readonly GetUsersHandler _handlerGet;private readonly CreateUserHandler _handler;
-        public UsersController(CreateUserHandler handler,GetUsersHandler handlerGet)//AppDbContext context)
+        private readonly IUserService _userService;
+
+        public UsersController(IUserService userService)
         {
-            _handler = handler;
-            _handlerGet = handlerGet;
+            _userService = userService;
         }
 
         [HttpGet]
-        public async Task<IActionResult>Get()
+        public async Task<IActionResult> GetAll()
         {
-            var users = await _handlerGet.Execute();
-            return Ok(users);
+            var result = await _userService.GetAllAsync();
+            return Ok(result);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Post(CreateUserDto dto)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
         {
-            var command = new CreateUserCommand
-            {
-                Name = dto.Name,
-                Email = dto.Email,
-                Password = dto.Password
-            };
+            var result = await _userService.GetByIdAsync(id);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateUserCommand command)
+        {
 
-            await _handler.Execute(command);
-
-            return Ok();
+            var result = await _userService.CreateAsync(command);
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
+        }
+        
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id,[FromBody] UpdateUserCommand command)
+        {
+            command.Id = id;
+            var result = await _userService.UpdateAsync (command);
+            if (result == null) return NotFound();
+            return Ok(result);
         }
     }
 }

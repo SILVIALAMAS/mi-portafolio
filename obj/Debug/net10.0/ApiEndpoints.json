@@ -1,138 +1,349 @@
 [
   {
-    "ContainingType": "TicketingAPI.Controllers.AuditLogsController",
-    "Method": "GetLogs",
-    "RelativePath": "api/AuditLogs",
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.AuditLogsController",
+    "Method": "GetByEntity",
+    "RelativePath": "api/v1/auditlogs/entity/{entityType}/{entityId}",
     "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TicketingAPI.Controllers.ButacasController",
-    "Method": "GetButacas",
-    "RelativePath": "api/Butacas",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TicketingAPI.Controllers.ButacasController",
-    "Method": "CrearButaca",
-    "RelativePath": "api/Butacas",
-    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "butaca",
-        "Type": "TicketingAPI.Domain.Entities.Butaca",
+        "Name": "entityType",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "entityId",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "TicketingAPI.Controllers.ButacasController",
-    "Method": "GenerarButacas",
-    "RelativePath": "api/Butacas/generar",
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.AuditLogsController",
+    "Method": "GetByUser",
+    "RelativePath": "api/v1/auditlogs/user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.EventsController",
+    "Method": "GetAll",
+    "RelativePath": "api/v1/events",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.EventsController",
+    "Method": "Create",
+    "RelativePath": "api/v1/events",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
+      {
+        "Name": "command",
+        "Type": "TicketingAPI.Application.UseCases.Event.Commands.CreateEventCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.SectorsController",
+    "Method": "GetByEvent",
+    "RelativePath": "api/v1/events/{eventId}/sectors",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.SectorsController",
+    "Method": "Create",
+    "RelativePath": "api/v1/events/{eventId}/sectors",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "command",
+        "Type": "TicketingAPI.Application.UseCases.Sectors.Commands.CreateSectorCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.SectorsController",
+    "Method": "GetById",
+    "RelativePath": "api/v1/events/{eventId}/sectors/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.SectorsController",
+    "Method": "Update",
+    "RelativePath": "api/v1/events/{eventId}/sectors/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "command",
+        "Type": "TicketingAPI.Application.UseCases.Sectors.Commands.UpdateSectorCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.SeatsController",
+    "Method": "GetBySector",
+    "RelativePath": "api/v1/events/{eventId}/sectors/{sectorId}/seats",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
       {
         "Name": "sectorId",
         "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TicketingAPI.Controllers.EventosController",
-    "Method": "GetEventos",
-    "RelativePath": "api/Eventos",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TicketingAPI.Controllers.EventosController",
-    "Method": "CrearEvento",
-    "RelativePath": "api/Eventos",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "evento",
-        "Type": "TicketingAPI.Domain.Entities.Evento",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "ReservasController",
-    "Method": "Get",
-    "RelativePath": "api/reservas",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ReservasController",
-    "Method": "Post",
-    "RelativePath": "api/reservas",
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.SeatsController",
+    "Method": "Create",
+    "RelativePath": "api/v1/events/{eventId}/sectors/{sectorId}/seats",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "reserva",
-        "Type": "TicketingAPI.Domain.Entities.Reserva",
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "sectorId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "command",
+        "Type": "TicketingAPI.Application.UseCases.Seats.Commands.CreateSeatCommand",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "TicketingAPI.Controllers.SectoresController",
-    "Method": "GetSectores",
-    "RelativePath": "api/Sectores",
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.SeatsController",
+    "Method": "GetById",
+    "RelativePath": "api/v1/events/{eventId}/sectors/{sectorId}/seats/{id}",
     "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TicketingAPI.Controllers.SectoresController",
-    "Method": "CrearSector",
-    "RelativePath": "api/Sectores",
-    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "sector",
-        "Type": "TicketingAPI.Domain.Entities.Sector",
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "sectorId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "TicketingAPI.Controllers.UsersController",
-    "Method": "Get",
-    "RelativePath": "api/users",
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.SeatsController",
+    "Method": "Reserve",
+    "RelativePath": "api/v1/events/{eventId}/sectors/{sectorId}/seats/{id}/reserve",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "sectorId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "command",
+        "Type": "TicketingAPI.Application.UseCases.Seats.Commands.ReserveSeatCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.EventsController",
+    "Method": "GetById",
+    "RelativePath": "api/v1/events/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.EventsController",
+    "Method": "Update",
+    "RelativePath": "api/v1/events/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "command",
+        "Type": "TicketingAPI.Application.UseCases.Event.Commands.UpdateEventCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.ReservationsController",
+    "Method": "GetById",
+    "RelativePath": "api/v1/reservations/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.ReservationsController",
+    "Method": "Update",
+    "RelativePath": "api/v1/reservations/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "command",
+        "Type": "TicketingAPI.Application.UseCases.Reservations.Commands.UpdateReservationCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.ReservationsController",
+    "Method": "GetByUser",
+    "RelativePath": "api/v1/reservations/user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.UsersController",
+    "Method": "GetAll",
+    "RelativePath": "api/v1/users",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -140,16 +351,53 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "TicketingAPI.Controllers.UsersController",
-    "Method": "Post",
-    "RelativePath": "api/users",
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.UsersController",
+    "Method": "Create",
+    "RelativePath": "api/v1/users",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "dto",
-        "Type": "TicketingAPI.Application.DTOs.User.CreateUserDto",
+        "Name": "command",
+        "Type": "TicketingAPI.Application.UseCases.User.Commands.CreateUserCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.UsersController",
+    "Method": "GetById",
+    "RelativePath": "api/v1/users/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketingAPI.WebAPI.Controllers.UsersController",
+    "Method": "Update",
+    "RelativePath": "api/v1/users/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "command",
+        "Type": "TicketingAPI.Application.UseCases.User.Commands.UpdateUserCommand",
         "IsRequired": true
       }
     ],

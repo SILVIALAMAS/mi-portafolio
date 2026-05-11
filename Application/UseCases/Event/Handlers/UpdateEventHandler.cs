@@ -1,6 +1,6 @@
 ﻿using TicketingAPI.Application.DTOs.Event;
 using TicketingAPI.Application.UseCases.Event.Commands;
-
+using TicketingAPI.Application.UseCases.Sectors.Handlers;
 using TicketingAPI.Application.Interfaces;
 using TicketingAPI.Domain.Entities;
 namespace TicketingAPI.Application.UseCases.Event.Handlers
@@ -13,7 +13,7 @@ namespace TicketingAPI.Application.UseCases.Event.Handlers
         }
         public async Task<EventResponseDto?> HandleAsync(UpdateEventCommand command)
         {
-            var existingEvent = await _eventRepository.GetByIdWithSectorAsync(command.Id);
+            var existingEvent = await _eventRepository.GetByIdWithSectorsAsync(command.Id);
             if (existingEvent == null)
             {
                 throw new Exception("Evento no encontrado");
